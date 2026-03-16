@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>GPU Collective Communication Visualizer</title>
+<meta name="description" content="Interactive web visualization for understanding collective communication algorithms. Learn how AllReduce, Broadcast, Reduce, AllGather, ReduceScatter, AllToAll work step by step — the patterns that NCCL, RCCL, and other GPU communication libraries implement.">
+<meta name="keywords" content="collective communication, AllReduce, Ring AllReduce, Tree AllReduce, Broadcast, Reduce, AllGather, ReduceScatter, AllToAll, Gather, Scatter, GPU communication, collective communication explained, how AllReduce works, Ring AllReduce visualization, distributed training, deep learning, NCCL, RCCL, MPI, data parallelism, model parallelism, FSDP, ZeRO, gradient synchronization, multi-GPU, distributed computing">
+<meta name="author" content="gpu-comm-visualizer">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hyojun.me/gpu-comm-visualizer">
+<meta property="og:title" content="GPU Collective Communication Visualizer">
+<meta property="og:description" content="Interactive web visualization for understanding collective communication algorithms (as used in NCCL, RCCL, MPI). Learn how AllReduce, Broadcast, Reduce, AllGather and more work step by step.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hyojun.me/gpu-comm-visualizer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPU Collective Communication Visualizer">
+<meta name="twitter:description" content="Interactive visualization for understanding collective communication algorithms (as used in NCCL, RCCL, MPI). Step-by-step GPU communication animation.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "GPU Collective Communication Visualizer",
+  "alternateName": "GPU Comm Visualizer",
+  "description": "Interactive web visualization for understanding collective communication algorithms used in distributed GPU computing. Learn how AllReduce, Broadcast, Reduce, AllGather, ReduceScatter, AllToAll, Gather, and Scatter work step by step — the patterns implemented by NCCL, RCCL, and other libraries.",
+  "url": "https://hyojun.me/gpu-comm-visualizer",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0" },
+  "keywords": "collective communication, AllReduce, Ring AllReduce, Ring AllReduce visualization, collective communication visualization, distributed training, deep learning, GPU communication, NCCL, RCCL"
+}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<noscript>
+<article>
+<h1>GPU Collective Communication Visualizer</h1>
+<p>An interactive web visualization for understanding collective communication — the fundamental communication patterns used in distributed GPU computing. GPU communication libraries (NVIDIA NCCL, AMD RCCL) and distributed computing frameworks (MPI, Gloo) implement these patterns, and this tool helps you learn how they work.</p>
+<p>See how data moves between GPUs in Ring, Tree, and Naive topologies — step by step, with real-time animation.</p>
+
+<h2>What is Collective Communication?</h2>
+<p>Collective communication refers to communication patterns where multiple GPUs participate together. These patterns are essential for distributed deep learning training — GPU communication libraries (NVIDIA NCCL, AMD RCCL) and distributed computing frameworks (MPI, Gloo) all implement them. This tool visualizes how each algorithm works internally, helping you understand the core concepts.</p>
+
+<h2>AllReduce Visualization</h2>
+<p>AllReduce is the most widely used collective operation in distributed training. It sums values across all GPUs and distributes the result back. This tool visualizes Ring AllReduce, Tree AllReduce, and Naive AllReduce step by step, showing exactly how data flows between GPUs at each stage.</p>
+
+<h2>Supported Operations</h2>
+<ul>
+<li><strong>AllReduce</strong> (Ring, Tree, Naive) — Reduce all GPU values and broadcast the result to every GPU. Essential for gradient synchronization in distributed training (PyTorch DDP, Horovod).</li>
+<li><strong>Broadcast</strong> (Tree, Naive) — Copy one GPU's data to all other GPUs. Used for model parameter initialization and synchronization.</li>
+<li><strong>Reduce</strong> (Tree, Naive) — Aggregate all GPU data to a single root GPU. Used in parameter server architectures.</li>
+<li><strong>AllGather</strong> (Ring) — Each GPU collects all unique data chunks from every other GPU. Used in FSDP/ZeRO for parameter restoration before forward pass.</li>
+<li><strong>ReduceScatter</strong> (Ring) — Reduce and distribute result chunks across GPUs. Core operation in FSDP/ZeRO gradient sharding for memory-efficient training.</li>
+<li><strong>AllToAll</strong> (Naive) — Personalized data exchange between all GPU pairs. Used in Mixture of Experts (MoE) models for token routing.</li>
+<li><strong>Gather</strong> (Naive) — Collect unique chunks from all GPUs to root.</li>
+<li><strong>Scatter</strong> (Naive) — Distribute root's chunks to each GPU.</li>
+</ul>
+
+<h2>Algorithm Topologies</h2>
+<ul>
+<li><strong>Ring AllReduce</strong> — Data flows in a circular pattern. Bandwidth-optimal for large messages. Widely used algorithm for multi-GPU AllReduce (e.g. default in NCCL).</li>
+<li><strong>Tree AllReduce</strong> — Binary tree structure for logarithmic-depth communication. Lower latency for small messages.</li>
+<li><strong>Naive (Direct)</strong> — Star topology with direct GPU-to-GPU transfers.</li>
+</ul>
+
+<h2>Use Cases</h2>
+<p>Understanding these collective communication primitives helps you reason about how distributed deep learning frameworks (PyTorch DDP, PyTorch FSDP, DeepSpeed ZeRO, Megatron-LM, Horovod) and communication libraries (NCCL, RCCL, MPI, Gloo) work under the hood.</p>
+
+<p>JavaScript is required to run this application.</p>
+</article>
+</noscript>
+</body>
+</html>
